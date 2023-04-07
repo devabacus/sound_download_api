@@ -1,18 +1,20 @@
 import tkinter as tk
 from tkinter import ttk
 
+from .custom_widgets import CustomText
+
+def create_text_input(app):
+    text_input = CustomText(app, wrap="word")
+    text_input.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
+    return text_input
+
+
 def paste_text(event):
     try:
         event.widget.insert(tk.INSERT, event.widget.clipboard_get())
     except tk.TclError:
         pass
     return "break"
-
-def create_text_input(app):
-    text_input = tk.Text(app, wrap="word")
-    text_input.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
-    text_input.bind("<Control-v>", paste_text)
-    return text_input
 
 
 def create_output_label(app):
